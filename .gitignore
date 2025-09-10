@@ -51,3 +51,8 @@ credentials.*
 # Local sqlite/db
 *.sqlite3
 *.db
+
+# Node.js (for semantic-release tooling)
+node_modules/
+package-lock.json
+package.json
