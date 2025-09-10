@@ -1,0 +1,3 @@
+D:\oh-my-posh-themes
+├── amro.omp.json
+└── hul10.omp.json

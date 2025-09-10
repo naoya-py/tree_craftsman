@@ -1,0 +1,116 @@
+D:\Dev
+├── Archives
+├── Data
+│   ├── datasets
+│   │   └── dataset-cars-v1
+│   │       ├── metadata.yaml
+│   │       ├── processed
+│   │       └── raw
+│   ├── fonts
+│   │   ├── LICENSES
+│   │   └── my-font.ttf
+│   ├── images
+│   ├── metadata_catalog.csv
+│   ├── models
+│   │   └── README.md
+│   └── templates
+├── Docker
+│   ├── cleanup-scripts
+│   ├── compose-files
+│   ├── images-info.yaml
+│   └── volumes
+├── Projects
+│   ├── py_
+│   ├── py_Kakei_Insight
+│   └── py_tree_craftsman
+│       ├── README.md
+│       ├── logs
+│       │   └── tree_logs.jsonl
+│       ├── out
+│       │   ├── Dev_tree.json
+│       │   └── Dev_tree.txt
+│       ├── requirements.txt
+│       ├── src
+│       │   └── tree_craftsman
+│       │       ├── __init__.py
+│       │       ├── __main__.py
+│       │       ├── __pycache__
+│       │       │   ├── __init__.cpython-312.pyc
+│       │       │   ├── __main__.cpython-312.pyc
+│       │       │   └── generator.cpython-312.pyc
+│       │       └── generator.py
+│       └── tests
+│           └── test_generator.py
+├── Repos
+│   └── pyS_LinkChecker
+│       ├── Docstrings
+│       │   ├── __init__.py
+│       │   ├── __pycache__
+│       │   │   ├── __init__.cpython-312.pyc
+│       │   │   └── mytool.cpython-312.pyc
+│       │   ├── html_report.py
+│       │   └── mytool.py
+│       ├── README.md
+│       ├── __pycache__
+│       │   ├── html_report.cpython-312.pyc
+│       │   └── mytool.cpython-312.pyc
+│       ├── html_report.py
+│       ├── mkdocs_site
+│       │   ├── README.md
+│       │   ├── docs
+│       │   │   ├── index.md
+│       │   │   └── reference.md
+│       │   ├── mkdocs.yml
+│       │   └── requirements-mkdocs.txt
+│       ├── mytool.py
+│       ├── pytest.ini
+│       ├── requirements.txt
+│       ├── results
+│       │   ├── 2025-09-04T09-58-12.842660+09-00
+│       │   │   ├── report.csv
+│       │   │   ├── report.json
+│       │   │   └── run_info.txt
+│       │   ├── 2025-09-04T10-00-12.880014+09-00
+│       │   │   ├── report.csv
+│       │   │   ├── report.json
+│       │   │   └── run_info.txt
+│       │   └── 2025-09-04T10-01-17.104297+09-00
+│       │       ├── report.csv
+│       │       ├── report.json
+│       │       └── run_info.txt
+│       ├── samples
+│       │   └── basic-urls
+│       │       ├── README.md
+│       │       └── urls.txt
+│       ├── sphinx_site
+│       │   ├── Makefile
+│       │   ├── README.md
+│       │   ├── generate_apidoc.ps1
+│       │   ├── make.bat
+│       │   ├── requirements-sphinx.txt
+│       │   └── source
+│       │       ├── conf.py
+│       │       ├── generated
+│       │       ├── index.rst
+│       │       └── modules.rst
+│       └── tests
+│           ├── __pycache__
+│           │   ├── conftest.cpython-312-pytest-8.4.1.pyc
+│           │   └── test_mytool_and_html.cpython-312-pytest-8.4.1.pyc
+│           ├── conftest.py
+│           └── test_mytool_and_html.py
+├── Tools
+│   ├── local-bins
+│   ├── scripts
+│   │   ├── backup-to-onedrive.ps1
+│   │   └── docker-prune.ps1
+│   └── templates
+│       └── fastapi_template_README.md
+├── Workspace
+│   ├── pycharm-workspaces
+│   └── vscode-workspaces
+│       └── myapp.code-workspace
+└── docs
+    ├── backup_and_restore.md
+    ├── dev-guides.md
+    └── docker-usage-wsl2.md

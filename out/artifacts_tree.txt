@@ -1,0 +1,7 @@
+D:\Dev\Projects\py_scraping_test\tools\artifacts
+└── test-logs
+    └── site-discovery
+        └── debug-branch
+            └── 20250910t065607z
+                └── 20250910
+                    └── site-discovery-debug-branch-20250910t065607z-gw0-20250910T065607Z-logs_schema_v1.jsonl

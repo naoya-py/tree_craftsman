@@ -1,0 +1,53 @@
+# runtime outputs
+results/
+report*.csv
+report*.json
+report*.html
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Test / typecheck caches
+.pytest_cache/
+.mypy_cache/
+.tox/
+
+# Packaging / build
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Coverage
+.coverage
+htmlcov/
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local secrets / env
+.env
+.env.local
+credentials.*
+*.pem
+.secret
+
+# Local sqlite/db
+*.sqlite3
+*.db
