@@ -1,0 +1,12 @@
+orjson
+structlog
+pendulum
+black
+flake8
+isort
+mypy
+pylint
+ruff
+pytest
+click
+rich
