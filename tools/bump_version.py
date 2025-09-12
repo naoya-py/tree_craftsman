@@ -197,7 +197,7 @@ def update_files(repo_root: str, new_version: str) -> None:
             if not ok:
                 # validation failed -> attempt recovery from backup
                 try:
-                    os.replace(bak, pyproject)
+                    shutil.copy2(bak, pyproject)
                 except Exception:
                     raise RecoveryError("Validation failed and recovery failed for pyproject.toml")
                 raise ValidationError("Updated pyproject.toml failed TOML validation; backup restored")
@@ -214,7 +214,7 @@ def update_files(repo_root: str, new_version: str) -> None:
             ok = _write_tmp_and_validate(setup_cfg, updated_text, kind="ini")
             if not ok:
                 try:
-                    os.replace(bak, setup_cfg)
+                    shutil.copy2(bak, setup_cfg)
                 except Exception:
                     raise RecoveryError("Validation failed and recovery failed for setup.cfg")
                 raise ValidationError("Updated setup.cfg failed INI validation; backup restored")
