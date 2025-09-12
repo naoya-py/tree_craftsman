@@ -7,7 +7,7 @@ name = "py-tree-craftsman"
 version = "0.1.0"
 description = "Generate ASCII tree and machine JSON from a directory"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.12.10"
 dependencies = [
     "orjson",
     "structlog",
@@ -29,7 +29,6 @@ dev = [
     "pylint",
     "ruff",
     "pytest",
-    # Python <3.11 の環境で tomllib が無い場合のフォールバック
     "toml",
 ]
 
@@ -37,3 +36,6 @@ dev = [
 test = [
     "pytest",
 ]
+[tool.poetry.group.dev.dependencies]
+pytest = "<8"
+
