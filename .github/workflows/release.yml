@@ -39,19 +39,14 @@ jobs:
 
       - name: Install semantic-release and plugins (temporary)
         run: |
-          # Recommended: pin versions in package.json devDependencies and use npm ci
-          npm install --no-save semantic-release@21 \
-            @semantic-release/commit-analyzer \
-            @semantic-release/release-notes-generator \
-            @semantic-release/changelog \
-            @semantic-release/exec \
-            @semantic-release/git \
-            @semantic-release/github
+          # Recommended: pin versions in package.json devDependencies and use `npm ci`
+          npm install --no-save semantic-release@21 @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/exec @semantic-release/git @semantic-release/github
 
-      - name: Install Python deps for tools (optional)
+      - name: Install Python deps for tools (if needed)
         run: |
           python -m pip install --upgrade pip
-          pip install --no-deps -r requirements.txt || true
+          # If running on Python <3.11, ensure `toml` is available; otherwise tomllib will be used.
+          pip install --no-deps toml || true
 
       - name: Run semantic-release
         env:
