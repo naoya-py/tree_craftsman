@@ -18,3 +18,22 @@ dependencies = [
 
 [project.scripts]
 pytree = "tree_craftsman.__main__:cli"
+
+[project.optional-dependencies]
+# 開発用（フォーマット・静的解析・テスト等）
+dev = [
+    "black",
+    "flake8",
+    "isort",
+    "mypy",
+    "pylint",
+    "ruff",
+    "pytest",
+    # Python <3.11 の環境で tomllib が無い場合のフォールバック
+    "toml",
+]
+
+# テスト専用（必要に応じて pytest プラグイン等を追加）
+test = [
+    "pytest",
+]
