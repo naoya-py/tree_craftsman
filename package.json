@@ -1,0 +1,30 @@
+{
+  "name": "tree_craftsman",
+  "version": "0.0.0",
+  "description": "Utilities for tree_craftsman project (meta package for CI/release)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/naoya-py/tree_craftsman.git"
+  },
+  "author": "naoya-py <41898282+github-actions[bot]@users.noreply.github.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/naoya-py/tree_craftsman",
+  "bugs": {
+    "url": "https://github.com/naoya-py/tree_craftsman/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "release": "semantic-release"
+  },
+  "devDependencies": {
+    "semantic-release": "21.1.2",
+    "@semantic-release/commit-analyzer": "10.2.0",
+    "@semantic-release/release-notes-generator": "10.3.0",
+    "@semantic-release/changelog": "6.0.0",
+    "@semantic-release/exec": "6.0.1",
+    "@semantic-release/git": "11.0.0",
+    "@semantic-release/github": "9.0.0"
+  }
+}

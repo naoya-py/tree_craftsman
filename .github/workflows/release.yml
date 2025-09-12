@@ -37,10 +37,14 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Install semantic-release and plugins (temporary)
+      - name: Install dependencies
         run: |
-          # Recommended: pin versions in package.json devDependencies and use `npm ci`
-          npm install --no-save semantic-release@21 @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/exec @semantic-release/git @semantic-release/github
+          # Use npm ci for reproducible builds when package-lock.json exists, otherwise fall back to npm install
+          if test -f package-lock.json; then
+            npm ci
+          else
+            npm install --no-audit --no-fund
+          fi
 
       - name: Install Python deps for tools (if needed)
         run: |
