@@ -82,10 +82,18 @@ def _write_tmp_and_validate(path: str, content: str, kind: str = "toml") -> bool
             if _toml_loader is None:
                 raise RuntimeError("No TOML parser available (install 'toml' or use Python 3.11+)")
             try:
+                # tomllib (std) accepts bytes or str depending on implementation; prefer
+                # passing bytes for tomllib to avoid issues, and pass str to third-party
+                # 'toml' package which expects a str.
                 if _HAS_TOML_STD:
-                    # tomllib.loads expects bytes for some implementations; accept str by encode
-                    _toml_loader.loads(txt.encode("utf-8") if isinstance(txt, str) else txt)  # type: ignore
+                    # Some tomllib implementations expose loads that accept str.
+                    # Passing str is safe; if not, pass bytes.
+                    try:
+                        _toml_loader.loads(txt)  # type: ignore
+                    except TypeError:
+                        _toml_loader.loads(txt.encode("utf-8"))  # type: ignore
                 else:
+                    # third-party 'toml' expects a str
                     _toml_loader.loads(txt)  # type: ignore
             except Exception:
                 return False
