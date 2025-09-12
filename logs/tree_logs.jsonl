@@ -8,3 +8,5 @@
 
 {"path":"D:\\Dev\\Projects\\py_scraping_test\\tools\\artifacts","text_file":"D:\\Dev\\Projects\\py_tree_craftsman\\out\\artifacts_tree.txt","json_file":"D:\\Dev\\Projects\\py_tree_craftsman\\out\\artifacts_tree.json","size_bytes":535,"event":"tree_generated","level":"info","timestamp":"2025-09-10T16:02:12.303553+09:00"}
 
+{"path":"C:\\Users\\naoya\\Dev\\Projects\\tree_craftsman\\out\\samples","text_file":"C:\\Users\\naoya\\Dev\\Projects\\tree_craftsman\\out\\samples_tree.txt","json_file":"C:\\Users\\naoya\\Dev\\Projects\\tree_craftsman\\out\\samples_tree.json","size_bytes":2439,"event":"tree_generated","level":"info","timestamp":"2025-09-12T14:16:20.166438+09:00"}
+

@@ -36,6 +36,16 @@ dev = [
 test = [
     "pytest",
 ]
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["tree_craftsman"]
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.poetry]
+packages = [
+    { include = "tree_craftsman", from = "src" }
+]
 [tool.poetry.group.dev.dependencies]
 pytest = "<8"
 

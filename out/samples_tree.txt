@@ -1,0 +1,61 @@
+C:\Users\naoya\Dev\Projects\tree_craftsman\out\samples
+├── cdyqtfls.txt
+├── dir_gxufyt
+│   ├── dir_oezksa
+│   │   ├── dir_vgcjku
+│   │   │   ├── jytvrbsa.json
+│   │   │   ├── mygqfrtd.log
+│   │   │   └── npopgkey.log
+│   │   ├── dir_vhnnmz
+│   │   │   ├── lyqddepw.txt
+│   │   │   ├── pknfazup.json
+│   │   │   └── tjijotbe.log
+│   │   ├── ekrzbkvt.json
+│   │   ├── ewhogvrd.log
+│   │   └── ubmwbkhh.log
+│   ├── dir_xewgel
+│   │   ├── dir_gtnuct
+│   │   │   ├── gcwprmhy.log
+│   │   │   ├── ikaqhmkr.json
+│   │   │   └── yrwxonld.txt
+│   │   ├── dir_phgbwe
+│   │   │   ├── iopixgvx.txt
+│   │   │   ├── omztuneo.txt
+│   │   │   └── thnlobad.txt
+│   │   ├── gfurzzzz.log
+│   │   ├── ogkmvlzt.log
+│   │   └── uyeddrzt.txt
+│   ├── iirltkvo.txt
+│   ├── oqldkaku.json
+│   └── uircogzl.json
+├── dir_tmummv
+│   ├── biresrub.json
+│   ├── dir_fgbfna
+│   │   ├── dir_jjzapy
+│   │   │   ├── hjwhygdc.txt
+│   │   │   ├── jqpbvcjb.log
+│   │   │   └── ofiusond.txt
+│   │   ├── dir_nnczgn
+│   │   │   ├── ecafnsio.log
+│   │   │   ├── mgyxoqlw.txt
+│   │   │   └── yqwyzpav.log
+│   │   ├── tkkmpkrk.json
+│   │   ├── whpdzqet.txt
+│   │   └── wkicsprt.log
+│   ├── dir_gkufco
+│   │   ├── dir_gjwcel
+│   │   │   ├── axdeplic.txt
+│   │   │   ├── bilptnqu.log
+│   │   │   └── dvtcaoia.log
+│   │   ├── dir_wtnmxn
+│   │   │   ├── niqrmtdn.json
+│   │   │   ├── tuquferr.log
+│   │   │   └── wwkybfle.log
+│   │   ├── mwrnwcvq.json
+│   │   ├── zfvmowcx.json
+│   │   └── znkumfvm.log
+│   ├── lnkbtkui.txt
+│   └── tmaourwt.log
+├── iazhyxnh.txt
+├── manifest.json
+└── rifcaxvx.txt
