@@ -1,53 +1,49 @@
-# runtime outputs
-results/
-report*.csv
-report*.json
-report*.html
+# File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
+# Created by https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=windows,visualstudiocode
 
-# Python bytecode
-__pycache__/
-*.py[cod]
-*$py.class
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
 
-# Virtual environments
-.venv/
-venv/
-env/
-ENV/
+# Local History for Visual Studio Code
+.history/
 
-# Test / typecheck caches
-.pytest_cache/
-.mypy_cache/
-.tox/
+# Built Visual Studio Code Extensions
+*.vsix
 
-# Packaging / build
-build/
-dist/
-*.egg-info/
-.eggs/
-pip-wheel-metadata/
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
 
-# Coverage
-.coverage
-htmlcov/
-
-# IDEs
-.vscode/
-.idea/
-*.sublime-workspace
-*.sublime-project
-
-# OS
-.DS_Store
+### Windows ###
+# Windows thumbnail cache files
 Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
 
-# Local secrets / env
-.env
-.env.local
-credentials.*
-*.pem
-.secret
+# Dump file
+*.stackdump
 
-# Local sqlite/db
-*.sqlite3
-*.db
+# Folder config file
+[Dd]esktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+

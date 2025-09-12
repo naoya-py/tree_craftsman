@@ -1,139 +1,141 @@
 # py_tree_craftsman (pytree)
 
-[![build](https://img.shields.io/badge/build-passing-brightgreen)](#)
-[![tests](https://img.shields.io/badge/tests-none-lightgrey)](#)
-[![coverage](https://img.shields.io/badge/coverage-0%25-lightgrey)](#)
+軽量なユーティリティ `pytree` は指定したディレクトリから ASCII ツリーを生成し、
+人間向けの UTF-8 テキストと機械処理向けの JSON を出力します。ログは
+`logs/tree_logs.jsonl` に JSONL で記録します（structlog + orjson）。
 
-小さなユーティリティ `pytree` は、指定したディレクトリから ASCII ツリーを生成し、人間向けの UTF-8 テキストと機械処理向けの JSON を出力します。追加で Structlog + orjson を用いて `logs/tree_logs.jsonl` に JSONL ログを残します。日時は Pendulum の `Asia/Tokyo`（ISO 8601、常に +09:00）で付与します。
+この README はリポジトリ現状に合わせて更新されています。
 
 ## 目次
-- プロジェクト概要
-- インストール
-- 実行方法
-- サンプル
-- コマンドライン引数とオプション
-- 出力とログ
-- 終了コード
+- 概要
+- インストール（Poetry）
+- 使い方（CLI / スクリプト）
+- サンプル生成スクリプト
+- ログとローテーション
+- テスト
+- 開発上の注意点
 
-## プロジェクト概要
+## 概要
 
-`pytree` は次を行います:
+現在の実装で提供している主な機能:
 
 - 指定ディレクトリのファイル/フォルダ構造を ASCII tree として生成
-- 人間向け UTF-8 テキスト (`<basename>_tree.txt`) を作成
-- orjson でシリアライズした機械処理用 JSON (`<basename>_tree.json`) を作成
-- `logs/tree_logs.jsonl` に JSONL を追記（structlog + orjson）
+- 人間向けテキスト（`out/..._tree.txt`）と機械向け JSON（`out/..._tree.json`）を出力
+- `src/tree_craftsman/logger.py` にサイズベースのログローテーションを行う
+	`configure_size_rotating_logger` を用意
+- 開発用にランダムなフォルダ構造を生成するスクリプトを `tools/generate_sample_tree.py`
+	として追加
+- テストは `pytest` を使い `tests/` 以下に配置（`tests/conftest.py` はテスト時に
+	`src/` を自動でパスに追加します）
 
-デフォルトの出力先はリポジトリルートの `out` ディレクトリです（`--out` で上書き可）。
+## インストール（Poetry 推奨）
 
-## インストール
-
-開発用仮想環境を作り、依存をインストールしてください:
-
-```powershell
-python -m venv .venv
-& .\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-```
-
-将来的にパッケージ化する場合は `pyproject.toml` / `setup.cfg` に `console_scripts` を追加して `pytree` をインストールできるようにしてください。
-
-## 実行方法
-
-PowerShell 例（`src` を PYTHONPATH にして直接実行する場合）:
+Poetry を使う場合の手順（PowerShell）:
 
 ```powershell
-$env:PYTHONPATH = 'D:\Dev\Projects\py_tree_craftsman\src'
-D:\Dev\Projects\py_tree_craftsman\.venv\Scripts\python.exe -m tree_craftsman <PATH> [--out <OUT_DIR>]
+# 依存をインストール（dev グループを有効にする）
+poetry install --with dev
+
+# テスト実行
+poetry run pytest -q
 ```
 
-引数に `--out` を与えない場合、デフォルトはプロジェクトルート下の `out` ディレクトリです。
+備考: `pyproject.toml` 内で Python 要件と `pytest` バージョンを調整済みです。ローカルで
+直接 `python` を使う場合は `PYTHONPATH=src` を設定して実行できますが、開発では Poetry を
+推奨します。
 
-## サンプル
+## 使い方（CLI）
 
-指定したディレクトリのツリーを生成し、デフォルト出力先にファイルを作成する例:
+本プロジェクトは Click を使った CLI（モジュール `tree_craftsman.__main__`）を提供します。
+仮想環境から実行する例:
 
 ```powershell
-$env:PYTHONPATH = 'D:\Dev\Projects\py_tree_craftsman\src'
-D:\Dev\Projects\py_tree_craftsman\.venv\Scripts\python.exe -m tree_craftsman C:\Users\you\Documents
+# デフォルトの出力先はプロジェクトルートの `out` ディレクトリ
+poetry run python -m tree_craftsman C:\path\to\dir --out out
 ```
 
-もしくは `--out` を指定:
+主なオプション:
+
+- `path` (位置引数): 解析対象ディレクトリ
+- `--out <dir>`: 出力先（デフォルト: `./out`）
+- `-a`, `--show-hidden`: 隠しファイル/フォルダを含める
+- `-v`, `--verbose`: 冗長モード（複数回指定で詳細化）
+- `--debug`: スタックトレースを表示
+
+出力ファイル例:
+
+- `out/<basename>_tree.txt` — 人間向けテキスト（UTF-8）
+- `out/<basename>_tree.json` — 機械向け JSON（orjson でシリアライズ）
+
+## サンプル生成スクリプト
+
+テストや動作確認用にランダムなディレクトリ構造を作るスクリプトを用意しています:
+
+- `tools/generate_sample_tree.py`
+
+実行例:
 
 ```powershell
-D:\Dev\Projects\py_tree_craftsman\.venv\Scripts\python.exe -m tree_craftsman C:\Users\you\Documents --out C:\temp\tree_out
+# サンプルを生成して out/samples に配置
+poetry run python tools/generate_sample_tree.py --root out/samples --depth 3 --breadth 2 --files-per-dir 3 --max-kb 2
+
+# 生成結果の manifest を確認
+Get-Content out\samples\manifest.json | ConvertFrom-Json
+Get-ChildItem -Recurse out\samples | Select-Object FullName, Length
 ```
 
-## コマンドライン引数とオプション
+このスクリプトは `manifest.json` を作成し、生成したファイル/ディレクトリの一覧を記録します。
 
-`pytree`（モジュールとして `python -m tree_craftsman` でも利用可）は Click を使った CLI を提供します。主な引数/オプション:
+## ログとローテーション
 
-- `path` (必須位置引数): 解析対象のディレクトリパス（存在チェックあり）
-- `--out <dir>`: 出力先ディレクトリ（デフォルト: `./out`）
-- `-a`, `--show-hidden`: ドットファイル/フォルダを含める
-- `-v`, `--verbose`: 冗長モード（指定回数でログレベル上昇）
-- `--debug`: デバッグ用のスタックトレースを表示
+ロギングは `src/tree_craftsman/logger.py` の `configure_size_rotating_logger` を使うと簡単に
+サイズベースのローテーションが行えます（`logging.handlers.RotatingFileHandler` を利用）。
 
-使用例:
+実装上のポイント:
 
-```powershell
-D:\Dev\Projects\py_tree_craftsman\.venv\Scripts\python.exe -m tree_craftsman C:\path\to\dir --out D:\out\dir -a -v
+- 単一プロセス環境での利用を想定（Windows の場合、複数プロセスで同一ファイルへ書き込むと
+	競合が発生するため、マルチプロセス対応が必要なら `concurrent-log-handler` 等を検討してください）
+- ローテート設定: `maxBytes`, `backupCount` を指定して古いログを自動削除
+- 出力は JSONL（structlog + orjson）やテキストでも可能
+- 将来的にはローテート後の圧縮（`.gz`）や保持ポリシー（age/size）にも対応予定
+
+例: ロガー設定（コードスニペット）
+
+```python
+from tree_craftsman.logger import configure_size_rotating_logger
+
+logger = configure_size_rotating_logger('logs/tree_logs.jsonl', max_bytes=10*1024*1024, backup_count=5)
+logger.info('started', path=str(path))
 ```
-
-自動生成されるヘルプは以下のコマンドで確認できます:
-
-```powershell
-D:\Dev\Projects\py_tree_craftsman\.venv\Scripts\python.exe -m tree_craftsman --help
-```
-
-実際のヘルプ出力例:
-
-```text
-Usage: pytree [OPTIONS] [PATH]
-
-	pytree: generate an ASCII tree and machine-
-	readable json for PATH.
-
-	PATH must be an existing directory.
-
-Options:
-	--out TEXT         Output directory (defaults
- to                                                                 repo/out)
-	-a, --show-hidden  Include hidden files      
-	-v, --verbose      Increase verbosity        
-	--debug            Show debug output
-	--help             Show this message and exit
-```
-
-## 出力とログ
-
-- 人間向けのテキスト: `out/<basename>_tree.txt` (UTF-8)
-- 機械向け JSON: `out/<basename>_tree.json` (orjson によるエンコード、バイナリとして保存)
-- ログ: `logs/tree_logs.jsonl` に JSONL 形式で追記（structlog + orjson）
-
-ログには以下のような情報が含まれます: パス、生成時刻（ISO 8601, Asia/Tokyo）、出力ファイルパス、ファイルサイズなど。
-
-## 終了コード
-
-CLI は明確な終了コードを返します:
-
-- `0` — 成功
-- `2` — 使用方法エラー（引数不足など）
-- `3` — 入力パスが見つからない（FileNotFound）
-- `4` — 書き込み/権限エラーもしくはその他の実行時エラー
 
 ## テスト
 
-簡易な smoke テストは `tests/test_generator.py` にあります。pytest を使って拡張テストを追加してください。
+現在のテスト構成:
+
+- `tests/test_rotating_logger.py` — RotatingFileHandler の動作確認
+- `tests/conftest.py` — テスト実行時に `src/` を sys.path に追加
+
+テスト実行:
 
 ```powershell
-D:\Dev\Projects\py_tree_craftsman\.venv\Scripts\python.exe -m pytest -q
+poetry run pytest -q
 ```
 
-## ライセンス
+テスト状況: ローカルで `3 passed` を確認済みです。
 
-プロジェクトのライセンスをここに明記してください（例: MIT）。
+## 開発上の注意点
+
+- `src/` レイアウトを採用しているため、開発時は Poetry 経由で仮想環境を使うか、
+	`PYTHONPATH` に `src` を追加してテスト/実行を行ってください。`tests/conftest.py` は
+	テスト実行を容易にするため `src` を自動で追加します。
+- マルチプロセス向けのロギングや、本番のログ集約（Filebeat/Fluentd/Loki 等）は別途運用設計が必要です。
 
 ---
 
-必要なら README に CLI 説明の短い図示、出力 JSON のスキーマ例、CI バッジの本番リンクを追加します。どれを優先しますか？
+必要なら次の作業を行います:
+
+- ログ圧縮（ローテート後の自動 gzip）と manifest の拡張
+- 出力ファイル名を `実行ディレクトリ名/<basename>_YYYYMMDDTHHMMSS.ext` の形式に変更する `save_run_outputs` の実装
+- CI（GitHub Actions）ワークフロー追加（Windows + Poetry でテスト実行）
+
+どれを優先しますか？
